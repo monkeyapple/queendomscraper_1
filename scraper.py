@@ -28,13 +28,17 @@ class Scraper():
 
         ytstats=YouTubeStats(self.api_key,video_ids)
         items=ytstats.get_video_stats()
-
+        
         rowResult={}
         valid_cols=[]
         for idx,item in enumerate(items):
             rowResult[provide_dict[group_names[idx]][1][0]]=rowResult.get(provide_dict[group_names[idx]][1][0],item["statistics"]["viewCount"])
-            rowResult[provide_dict[group_names[idx]][1][1]]=rowResult.get(provide_dict[group_names[idx]][1][1],item["statistics"]["likeCount"])
+            if "likeCount" not in item["statistics"]:
+                rowResult[provide_dict[group_names[idx]][1][1]]=None
+            else:
+                rowResult[provide_dict[group_names[idx]][1][1]]=rowResult.get(provide_dict[group_names[idx]][1][1],item["statistics"]["likeCount"])
             valid_cols.extend([provide_dict[group_names[idx]][1][0],provide_dict[group_names[idx]][1][1]])
+        
         valid_cols.append('update_time')
         tz_Seo = pytz.timezone('Asia/Seoul') 
         datetime_Seo = datetime.now(tz_Seo)
