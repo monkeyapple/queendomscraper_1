@@ -2,8 +2,6 @@ from YTAPI import YouTubeStats
 from collections import defaultdict
 import pytz
 from datetime import datetime
-from dotenv import load_dotenv
-load_dotenv()
 
 class Scraper():
     def __init__(self,db,api_key):
