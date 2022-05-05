@@ -26,5 +26,5 @@ scraper_2.scrape(wjsnID='9DBy1r7YMMg',kep1erID='EzJfJhznH3s',vivizID='NyjWRuazgs
 api_key_3_v=os.environ.get('api_key_3_v')
 scraper_3_v=Scraper_v(db_3_v,api_key_3_v)
 #wjsn,kep1er,viviz,hyolyn,loona,bravegirls
-scraper_3_v.scrape(wjsnvivizID='',loonakep1erID='',hyolynbravegirlsID='')
+scraper_3_v.scrape(wjsnvivizID='Wm1quwZiefQ',loonakep1erID='RkvoilXKGN4',hyolynbravegirlsID='qsCO_iifc30')
 
