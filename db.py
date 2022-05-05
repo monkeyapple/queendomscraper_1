@@ -110,11 +110,57 @@ class DatabaseOperations_2():
         finally:
             if conn is not None:
                     conn.close()
+class DatabaseOperations_3_v():
+    def create_table(self):
+        command=(
+            """
+            CREATE TABLE qdscraper_vocal (
+                    id SERIAL PRIMARY KEY,
+                    wjsn_viviz_views INTEGER,
+                    wjsn_viviz_likes INTEGER,
+                    loona_kep1er_views INTEGER,
+                    loona_kep1er_likes INTEGER,
+                    hyolyn_bravegirls_views INTEGER,
+                    hyolyn_bravegirls_likes INTEGER,
+                    update_time TIMESTAMP NOT NULL
+            )
+            """)
+        conn = None
+        try:
+            database_url=os.environ.get('DATABASE_URL').replace("postgres://", "postgresql://", 1)
+            conn = psycopg2.connect(database_url)
+            cur = conn.cursor()
+            cur.execute(command)
+            conn.commit()                
+            cur.close()
+        except (Exception, psycopg2.DatabaseError) as error:
+            print(error)
+        finally:
+            if conn is not None:
+                    conn.close()
+
+    def insert_data(self,row,validCols):
+        conn=None
+        try:
+            database_url=os.environ.get('DATABASE_URL').replace("postgres://", "postgresql://", 1)
+            conn = psycopg2.connect(database_url)
+            cur = conn.cursor()
+            values=[row[column]for column in validCols]
+            insert_statement='INSERT INTO qdscraper_vocal (%s) VALUES %s'
+            cur.execute(insert_statement, (AsIs(','.join(validCols)), tuple(values)))
+            conn.commit()
+            conn.close()
+        except (Exception, psycopg2.DatabaseError) as error:
+            print("database:")
+            print(error)
+        finally:
+            if conn is not None:
+                    conn.close()
 
 if __name__=="__main__":
     # db_1=DatabaseOperations_1()
-    db_2=DatabaseOperations_2()
+    db_3_v=DatabaseOperations_3_v()
     # db_1.create_table()
-    db_2.create_table()
+    # db_2.create_table()
 else:
     "db module is imported"
