@@ -1,4 +1,4 @@
-from scraper import Scraper,Scraper_v
+from scraper import Scraper,Scraper_v,Scraper_d
 from db import DatabaseOperations_1,DatabaseOperations_2, DatabaseOperations_3_v,DatabaseOperations_3_d
 import os
 from dotenv import load_dotenv
@@ -31,6 +31,6 @@ scraper_3_v.scrape(wjsnvivizID='Wm1quwZiefQ',loonakep1erID='RkvoilXKGN4',hyolynb
 
 #Performance_3_dance
 api_key_3_d=os.environ.get('api_key_3_d')
-scraper_3_d=Scraper_v(db_3_d,api_key_3_d)
+scraper_3_d=Scraper_d(db_3_d,api_key_3_d)
 #wjsn,kep1er,viviz,hyolyn,loona,bravegirls
 scraper_3_d.scrape(hoylynwjsnID='AthYcVXwBAY',bravegirlsloonaID='9nzIFQsUGVI',viviz_kep1erID='rKRowS7eo1I')
