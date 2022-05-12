@@ -19,7 +19,7 @@ scraper_1.scrape(wjsnID='UITFHyWHS9Y',kep1erID='THiACt2pURE',vivizID='rY8Gz8bBoR
 #Performance2
 api_key_2=os.environ.get('api_key_2')
 scraper_2=Scraper(db_2,api_key_2)
-#wjsn,kep1er,viviz,hyolyn,loona,bravegirls
+#wjsn,kep1er,viviz,hyolyn,loona,bravegirl
 scraper_2.scrape(wjsnID='9DBy1r7YMMg',kep1erID='EzJfJhznH3s',vivizID='NyjWRuazgsw',hyolynID='BEZk9QVjA-s',loonaID='ytuMObZlqOE',bravegirlsID='jjjg8kUcl20')
 
 
