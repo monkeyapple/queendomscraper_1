@@ -85,5 +85,42 @@ class Scraper_v():
 
         self.db.insert_data(rowResult,valid_cols)
 
+class Scraper_d():
+    def __init__(self,db,api_key):
+        self.db=db
+        self.api_key=api_key
+    def scrape(self,hoylynwjsnID='',bravegirlsloonaID='',viviz_kep1erID=''):
+        provide_dict={
+            'hoylynwjsn':[hoylynwjsnID,('hoylyn_wjsn_views','hoylyn_wjsn_likes')],
+            'bravegirlsloona':[bravegirlsloonaID,('bravegirls_loona_views','bravegirls_loona_likes')],
+            'viviz_kep1er':[viviz_kep1erID,('viviz_kep1er_views','viviz_kep1er_likes')],
+            }
 
+        video_dict=defaultdict(str)
+        for i in provide_dict:
+            if provide_dict[i][0]!='':
+                video_dict[i]=provide_dict[i][0]
+        video_ids=",".join(video_dict.values())
+        group_names=list(video_dict.keys())
+
+        ytstats=YouTubeStats(self.api_key,video_ids)
+        items=ytstats.get_video_stats()
+        
+        rowResult={}
+        valid_cols=[]
+        for idx,item in enumerate(items):
+            rowResult[provide_dict[group_names[idx]][1][0]]=rowResult.get(provide_dict[group_names[idx]][1][0],item["statistics"]["viewCount"])
+            if "likeCount" not in item["statistics"]:
+                rowResult[provide_dict[group_names[idx]][1][1]]=None
+            else:
+                rowResult[provide_dict[group_names[idx]][1][1]]=rowResult.get(provide_dict[group_names[idx]][1][1],item["statistics"]["likeCount"])
+            valid_cols.extend([provide_dict[group_names[idx]][1][0],provide_dict[group_names[idx]][1][1]])
+        
+        valid_cols.append('update_time')
+        tz_Seo = pytz.timezone('Asia/Seoul') 
+        datetime_Seo = datetime.now(tz_Seo)
+        fmt = '%Y-%m-%d %H:%M'
+        rowResult['update_time']=datetime_Seo.strftime(fmt)
+
+        self.db.insert_data(rowResult,valid_cols)
 

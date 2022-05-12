@@ -1,5 +1,5 @@
 from scraper import Scraper,Scraper_v
-from db import DatabaseOperations_1,DatabaseOperations_2, DatabaseOperations_3_v
+from db import DatabaseOperations_1,DatabaseOperations_2, DatabaseOperations_3_v,DatabaseOperations_3_d
 import os
 from dotenv import load_dotenv
 load_dotenv()
@@ -7,6 +7,7 @@ load_dotenv()
 db_1=DatabaseOperations_1()
 db_2=DatabaseOperations_2()
 db_3_v=DatabaseOperations_3_v()
+db_3_d=DatabaseOperations_3_d()
 
 #Performance1
 api_key_1=os.environ.get('api_key_1')
@@ -28,3 +29,8 @@ scraper_3_v=Scraper_v(db_3_v,api_key_3_v)
 #wjsn,kep1er,viviz,hyolyn,loona,bravegirls
 scraper_3_v.scrape(wjsnvivizID='Wm1quwZiefQ',loonakep1erID='RkvoilXKGN4',hyolynbravegirlsID='qsCO_iifc30')
 
+#Performance_3_dance
+api_key_3_d=os.environ.get('api_key_3_d')
+scraper_3_d=Scraper_v(db_3_d,api_key_3_d)
+#wjsn,kep1er,viviz,hyolyn,loona,bravegirls
+scraper_3_d.scrape(hoylynwjsnID='',bravegirlsloonaID='',viviz_kep1erID='')
