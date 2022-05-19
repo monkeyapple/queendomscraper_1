@@ -3,6 +3,8 @@ import psycopg2
 from psycopg2.extensions import AsIs
 from dotenv import load_dotenv
 load_dotenv()
+
+#####################Performance_1#####################
 class DatabaseOperations_1():
     def create_table(self):
         command=(
@@ -57,6 +59,8 @@ class DatabaseOperations_1():
             if conn is not None:
                     conn.close()
 
+#####################Performance_2#####################
+
 class DatabaseOperations_2():
     def create_table(self):
         command=(
@@ -110,6 +114,10 @@ class DatabaseOperations_2():
         finally:
             if conn is not None:
                     conn.close()
+
+
+
+#####################Performance_3_vocal#####################
 class DatabaseOperations_3_v():
     def create_table(self):
         command=(
@@ -156,6 +164,8 @@ class DatabaseOperations_3_v():
         finally:
             if conn is not None:
                     conn.close()
+
+#####################Performance_3_dance#####################
 class DatabaseOperations_3_d():
     def create_table(self):
         command=(
@@ -184,6 +194,25 @@ class DatabaseOperations_3_d():
         finally:
             if conn is not None:
                     conn.close()
+    def insert_data(self,row,validCols):
+        conn=None
+        try:
+            database_url=os.environ.get('DATABASE_URL').replace("postgres://", "postgresql://", 1)
+            conn = psycopg2.connect(database_url)
+            cur = conn.cursor()
+            values=[row[column]for column in validCols]
+            insert_statement='INSERT INTO qdscraper_dance (%s) VALUES %s'
+            cur.execute(insert_statement, (AsIs(','.join(validCols)), tuple(values)))
+            conn.commit()
+            conn.close()
+        except (Exception, psycopg2.DatabaseError) as error:
+            print("database:")
+            print(error)
+        finally:
+            if conn is not None:
+                    conn.close()
+
+#####################Performance_3_final#####################
 
 class DatabaseOperations_3_final():
     def create_table(self):

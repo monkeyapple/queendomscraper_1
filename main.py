@@ -40,4 +40,4 @@ scraper_3_d.scrape(hoylynwjsnID='AthYcVXwBAY',bravegirlsloonaID='9nzIFQsUGVI',vi
 api_key_3=os.environ.get('api_key_3')
 scraper_3=Scraper(db_3,api_key_3)
 #wjsn,kep1er,viviz,hyolyn,loona,bravegirl
-scraper_3.scrape(wjsnID='',kep1erID='',vivizID='',hyolynID='',loonaID='',bravegirlsID='')
+scraper_3.scrape(wjsnID='hDm0qLxZd9I',kep1erID='B2xLS0GVeNI',vivizID='XxDKzs5pT1E',hyolynID='',loonaID='',bravegirlsID='')
